@@ -51,9 +51,9 @@ jobs:
           </servers>
         </settings>
         EOF
-
+  
     - name: Deploy WAR to Nexus
       run: |
-         mvn deploy \
-         - DskipTests \
-         - DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}/repository/maven-snapshots/
+        mvn deploy \
+          -DskipTests \
+          -DaltDeploymentRepository=nexus::default::http://${{ secrets.NEXUS_URL }}:8081/repository/maven-snapshots/
