@@ -7,7 +7,7 @@
 
     <groupId>com.akhilesh.app</groupId>
     <artifactId>java-tomcat-webapp</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>Java Tomcat Web App</name>
