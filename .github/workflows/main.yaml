@@ -25,3 +25,14 @@ jobs:
           curl -u "${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}" \
           --upload-file target/*.war \
           "${{ secrets.TOMCAT_URL }}/manager/text/deploy?path=/java-webapp&update=true"
+
+
+    - name: SonarQube Analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      run: |
+        mvn sonar:sonar \
+        -Dsonar.projectKey=java-webapp \
+        -Dsonar.host.url=$SONAR_HOST_URL \
+        -Dsonar.token=$SONAR_TOKEN
