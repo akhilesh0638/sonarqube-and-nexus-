@@ -56,4 +56,4 @@ jobs:
       run: |
          mvn deploy \
          - DskipTests \
-         - DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}
+         - DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}/repository/maven-snapshots/
