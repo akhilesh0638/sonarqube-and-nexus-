@@ -44,17 +44,16 @@ jobs:
         <settings>
           <servers>
             <server>
-              <id>nexus-releases</id>
-              <username>${NEXUS_USERNAME}</username>
-              <password>${NEXUS_PASSWORD}</password>
+              <id>nexus</id>
+              <username>${{ secrets.NEXUS_USERNAME }}</username>
+              <password>${{ secrets.NEXUS_PASSWORD }}</password>
             </server>
           </servers>
         </settings>
         EOF
-      env:
-        NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
 
-   
     - name: Deploy WAR to Nexus
-      run: mvn deploy
+      run: |
+         mvn deploy \
+         DskipTests \
+            -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}
