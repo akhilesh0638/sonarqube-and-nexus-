@@ -7,3 +7,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: setup jdk
+      uses: actions/setup-java@v4
+      with:
+        distribution: "temurin"
+        java-version: "17"
+      
+    - name: build artifact
+      run: mvn clean package
+
+    - name: deploy in tomcat
+      run: |
+          curl -u "${{ secrets.TOMCAT_USERNAME }}:{{ secrets.TOMCAT_PASSWORD }}" \
+          --upload-file: target/*.war \
+          "${{ secrets.TOMCAT_URL }}/manager/text/deploy?path=/java-webapp&update=true"
