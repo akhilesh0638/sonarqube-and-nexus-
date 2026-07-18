@@ -56,4 +56,4 @@ jobs:
       run: |
         mvn deploy \
           -DskipTests \
-          -DaltDeploymentRepository=nexus::default::http://${{ secrets.NEXUS_URL }}:8081/repository/maven-snapshots/
+          -DaltDeploymentRepository=nexus::default::http://${{ secrets.NEXUS_URL }}:8081/repository/maven-releases/
