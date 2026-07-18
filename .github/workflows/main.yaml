@@ -1,0 +1,9 @@
+name: sonarscan and nexus store
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
