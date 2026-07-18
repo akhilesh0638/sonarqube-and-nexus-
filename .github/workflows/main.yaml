@@ -22,6 +22,6 @@ jobs:
 
     - name: deploy in tomcat
       run: |
-          curl -u "${{ secrets.TOMCAT_USERNAME }}:{{ secrets.TOMCAT_PASSWORD }}" \
+          curl -u "${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}" \
           --upload-file: target/*.war \
           "${{ secrets.TOMCAT_URL }}/manager/text/deploy?path=/java-webapp&update=true"
