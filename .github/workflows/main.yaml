@@ -36,3 +36,24 @@ jobs:
         -Dsonar.projectKey=java-webapp \
         -Dsonar.host.url=$SONAR_HOST_URL \
         -Dsonar.token=$SONAR_TOKEN
+
+    - name: Configure Maven Settings
+      run: |
+        mkdir -p ~/.m2
+        cat > ~/.m2/settings.xml <<EOF
+        <settings>
+          <servers>
+            <server>
+              <id>nexus-releases</id>
+              <username>${NEXUS_USERNAME}</username>
+              <password>${NEXUS_PASSWORD}</password>
+            </server>
+          </servers>
+        </settings>
+        EOF
+    
+    - name: Deploy WAR to Nexus
+      run: mvn deploy
+      env:
+          MAVEN_OPTS: >
+            -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}/repository/maven-snapshots/    
