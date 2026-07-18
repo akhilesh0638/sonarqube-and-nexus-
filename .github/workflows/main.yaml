@@ -51,9 +51,10 @@ jobs:
           </servers>
         </settings>
         EOF
-    
+      env:
+        NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+
+   
     - name: Deploy WAR to Nexus
       run: mvn deploy
-      env:
-          MAVEN_OPTS: >
-            -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}/repository/maven-snapshots/    
