@@ -55,5 +55,5 @@ jobs:
     - name: Deploy WAR to Nexus
       run: |
          mvn deploy \
-         DskipTests \
-            -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}
+         - DskipTests \
+         - DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}
